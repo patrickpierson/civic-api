@@ -1,5 +1,3 @@
-from chalice import Chalice, Response
-from chalice import CORSConfig
 import boto3
 import csv
 from io import StringIO
@@ -186,12 +184,6 @@ class Legislators(object):
             return []
 
 
-@app.route('/')
-def index():
-    logger.info('Index hit')
-    return 'Reserved'
-
-@app.route('/address/{address}', cors=True)
 def address_lookup(address):
     address = address.replace('%20', ' ')
     logger.info('Address hit: %s' % address)
@@ -217,7 +209,6 @@ def address_lookup(address):
     }
 
 
-@app.route('/upload', methods=['PUT'], content_types=['text/csv'])
 def upload_to_s3():
     # object = s3.Object(bucket, upload_prefix + )
     # data = []
@@ -230,12 +221,12 @@ def upload_to_s3():
     }
 
 
-if __name__ == "__main__":
-    with open('data/test.csv', 'r') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',', quotechar='|')
-
-        for row in reader:
-            print(row)
+# if __name__ == "__main__":
+#     with open('data/test.csv', 'r') as csvfile:
+#         reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+#
+#         for row in reader:
+#             print(row)
 
     # test = Legislators()
     # geo = test.geocode('***REMOVED***')
