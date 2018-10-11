@@ -1,4 +1,4 @@
-import boto3
+#import boto3
 import csv
 from io import StringIO
 import os
@@ -8,14 +8,11 @@ import logging
 from datetime import datetime
 from pprint import pprint
 
+logger = logging.getLogger(__name__)
+
 bucket = 'civic.patrickpierson.us'
 upload_prefix = '/upload/'
-s3 = boto3.resource('s3')
-
-app = Chalice(app_name='civic-api')
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
+#s3 = boto3.resource('s3')
 
 class Legislators(object):
 
@@ -229,5 +226,4 @@ def upload_to_s3():
 #             print(row)
 
     # test = Legislators()
-    # geo = test.geocode('1813 willow creek ct, frederick, md')
     # pprint(test.lookup_openstates(geo.get('geocode').get('lat'), geo.get('geocode').get('long')))
